@@ -1,0 +1,4 @@
+spring:
+  flyway:
+    default-schema: chip_in
+    schemas: chip_in
