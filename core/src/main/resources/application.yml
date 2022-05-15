@@ -1,4 +1,4 @@
 spring:
   flyway:
-    default-schema: chip_in
-    schemas: chip_in
+    default-schema: CHIP_IN
+    schemas: CHIP_IN
