@@ -4,6 +4,5 @@ create table if not exists chat
         constraint chat_pk
             primary key,
     tg_chat_id   VARCHAR(50),
-    ping_list    text,
     tg_chat_name varchar(255)
 );
