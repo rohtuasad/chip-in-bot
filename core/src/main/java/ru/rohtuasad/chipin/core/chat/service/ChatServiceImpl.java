@@ -1,7 +1,6 @@
 package ru.rohtuasad.chipin.core.chat.service;
 
 import java.util.Optional;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.Nullable;
