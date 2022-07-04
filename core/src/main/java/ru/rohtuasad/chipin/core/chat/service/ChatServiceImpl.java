@@ -17,12 +17,12 @@ public class ChatServiceImpl implements ChatService {
 
   @Override
   @Nullable
-  public Chat getChat(String uuid) {
-    final Optional<Chat> chat = chatRepository.findById(uuid);
+  public Chat getChat(long id) {
+    final Optional<Chat> chat = chatRepository.findById(id);
     if (chat.isPresent()) {
       return chat.get();
     }
-    log.warn("Не удалось найти чат с uuid = {}", uuid);
+    log.warn("Не удалось найти чат с uuid = {}", id);
     return null;
   }
 

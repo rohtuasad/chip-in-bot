@@ -19,12 +19,12 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
   @Override
   public void onApplicationEvent(@NonNull ContextRefreshedEvent refreshedEvent) {
     Chat chat = new Chat();
-    chat.setTgChatId("1");
+    chat.setTgChatId(1L);
     chat.setTgChatName("Chat name");
     chatService.saveChat(chat);
 
     Chat chat2 = new Chat();
-    chat2.setTgChatId("2");
+    chat2.setTgChatId(2L);
     chat2.setTgChatName("Chat two");
     chatService.saveChat(chat2);
   }

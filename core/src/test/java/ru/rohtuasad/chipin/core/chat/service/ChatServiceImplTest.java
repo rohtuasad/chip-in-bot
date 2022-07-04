@@ -14,29 +14,29 @@ class ChatServiceImplTest {
 
   @Test
   void getChat() {
-    final Chat chat = chatService.getChat("1");
+    final Chat chat = chatService.getChat(1);
     assertEquals("Chat name", chat.getTgChatName());
   }
 
   @Test
   void saveChat() {
     Chat chat = new Chat();
-    chat.setTgChatId("3");
+    chat.setTgChatId(3L);
     chat.setTgChatName("Chat name three");
     chatService.saveChat(chat);
 
-    final Chat savedChat = chatService.getChat("3");
+    final Chat savedChat = chatService.getChat(3);
     assertEquals("Chat name three", savedChat.getTgChatName());
   }
 
   @Test
   void updateChat() {
     Chat chat = new Chat();
-    chat.setTgChatId("2");
+    chat.setTgChatId(2L);
     chat.setTgChatName("Chat name two");
     chatService.saveChat(chat);
 
-    final Chat savedChat = chatService.getChat("2");
+    final Chat savedChat = chatService.getChat(2);
     assertEquals("Chat name two", savedChat.getTgChatName());
   }
 }
