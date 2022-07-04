@@ -21,14 +21,4 @@ public class CustomJdbcConfiguration {
       }
     };
   }
-
-  @Bean
-  public ApplicationListener<BeforeSaveEvent<?>> securityUtilsIdGenerator() {
-    return event -> {
-      var entity = event.getEntity();
-      if (entity instanceof Chat) {
-        ((Chat) entity).setChatId(UUID.randomUUID());
-      }
-    };
-  }
 }

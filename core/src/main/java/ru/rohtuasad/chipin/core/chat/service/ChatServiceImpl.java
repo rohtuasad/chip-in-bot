@@ -33,13 +33,14 @@ public class ChatServiceImpl implements ChatService {
   }
 
   public Chat saveChat(Chat chat) {
-    if (chat.getChatId() == null && chat.getTgChatId() != null) {
+    if (chat.getId() == null && chat.getTgChatId() != null) {
       // Нужно проверить по tgChatId, возможно такой уже есть в базе
       final Chat byTgChatId = findByTgChatId(chat.getTgChatId());
       if (byTgChatId != null) {
         return byTgChatId;
       }
     }
+    chat.setIsNew(true);
     return chatRepository.save(chat);
   }
 }
