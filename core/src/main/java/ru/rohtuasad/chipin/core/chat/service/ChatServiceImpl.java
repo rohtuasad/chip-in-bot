@@ -18,7 +18,7 @@ public class ChatServiceImpl implements ChatService {
 
   @Override
   @Nullable
-  public Chat getChat(UUID uuid) {
+  public Chat getChat(String uuid) {
     final Optional<Chat> chat = chatRepository.findById(uuid);
     if (chat.isPresent()) {
       return chat.get();
@@ -27,17 +27,13 @@ public class ChatServiceImpl implements ChatService {
     return null;
   }
 
-  @Nullable
-  public Chat findByTgChatId(String tlgChatId) {
-    return chatRepository.findByTgChatId(tlgChatId);
-  }
-
   public Chat saveChat(Chat chat) {
-    if (chat.getId() == null && chat.getTgChatId() != null) {
+    if (chat.getId() != null) {
       // Нужно проверить по tgChatId, возможно такой уже есть в базе
-      final Chat byTgChatId = findByTgChatId(chat.getTgChatId());
+      final Chat byTgChatId = getChat(chat.getId());
       if (byTgChatId != null) {
-        return byTgChatId;
+        chat.setIsNew(false);
+        return chatRepository.save(chat);
       }
     }
     chat.setIsNew(true);

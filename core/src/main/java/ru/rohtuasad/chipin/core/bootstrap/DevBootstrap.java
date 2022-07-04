@@ -22,5 +22,10 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     chat.setTgChatId("1");
     chat.setTgChatName("Chat name");
     chatService.saveChat(chat);
+
+    Chat chat2 = new Chat();
+    chat2.setTgChatId("2");
+    chat2.setTgChatName("Chat two");
+    chatService.saveChat(chat2);
   }
 }
