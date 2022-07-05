@@ -3,6 +3,7 @@ package ru.rohtuasad.chipin.core.bootstrap;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
@@ -10,6 +11,7 @@ import ru.rohtuasad.chipin.core.chat.model.Chat;
 import ru.rohtuasad.chipin.core.chat.service.ChatService;
 
 @Component
+@Profile("dev")
 @RequiredArgsConstructor
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
