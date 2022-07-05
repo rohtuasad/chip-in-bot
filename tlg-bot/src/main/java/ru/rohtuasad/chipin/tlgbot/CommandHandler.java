@@ -1,16 +1,16 @@
 package ru.rohtuasad.chipin.tlgbot;
 
+import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.rohtuasad.chipin.core.chat.model.Chat;
 import ru.rohtuasad.chipin.core.chat.service.ChatService;
+import ru.rohtuasad.chipin.tlgbot.commands.PartyStart;
 
 @Slf4j
 @Component
@@ -24,10 +24,16 @@ public class CommandHandler extends TelegramLongPollingCommandBot {
   private String botUsername;
 
   private final ChatService chatService;
+  private final PartyStart partyStart;
 
   @Override
   public String getBotUsername() {
     return botUsername;
+  }
+
+  @PostConstruct
+  public void init() {
+    register(partyStart);
   }
 
   @Override
