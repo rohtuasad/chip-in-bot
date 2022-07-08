@@ -10,5 +10,5 @@ public class Party {
   private UUID partyId;
   private String partyName;
   private Boolean isActive;
-  private Long partyChatFk;
+  private Long chatId;
 }

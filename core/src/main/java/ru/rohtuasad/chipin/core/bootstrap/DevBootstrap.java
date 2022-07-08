@@ -9,13 +9,15 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import ru.rohtuasad.chipin.core.chat.model.Chat;
 import ru.rohtuasad.chipin.core.chat.service.ChatService;
+import ru.rohtuasad.chipin.core.party.service.PartyService;
 
 @Component
-@Profile("dev")
+@Profile({"dev", "test"})
 @RequiredArgsConstructor
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
   private final ChatService chatService;
+  private final PartyService partyService;
 
   @SneakyThrows
   @Override
@@ -24,6 +26,8 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     chat.setTgChatId(1L);
     chat.setTgChatName("Chat name");
     chatService.saveChat(chat);
+
+    partyService.createParty(1L);
 
     Chat chat2 = new Chat();
     chat2.setTgChatId(2L);

@@ -8,6 +8,7 @@ import org.springframework.data.relational.core.mapping.NamingStrategy;
 import org.springframework.data.relational.core.mapping.event.BeforeSaveEvent;
 import org.springframework.lang.NonNull;
 import ru.rohtuasad.chipin.core.chat.model.Chat;
+import ru.rohtuasad.chipin.core.party.model.Party;
 
 @Configuration
 public class CustomJdbcConfiguration {
@@ -18,6 +19,16 @@ public class CustomJdbcConfiguration {
       @NonNull
       public String getSchema() {
         return "chip_in";
+      }
+    };
+  }
+
+  @Bean
+  public ApplicationListener<BeforeSaveEvent<?>> partyIdGenerator() {
+    return event -> {
+      var entity = event.getEntity();
+      if (entity instanceof Party) {
+        ((Party) entity).setPartyId(UUID.randomUUID());
       }
     };
   }
