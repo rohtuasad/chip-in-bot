@@ -9,6 +9,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import ru.rohtuasad.chipin.core.chat.model.Chat;
 import ru.rohtuasad.chipin.core.chat.service.ChatService;
+import ru.rohtuasad.chipin.core.party.model.Party;
 import ru.rohtuasad.chipin.core.party.service.PartyService;
 
 @Component
@@ -27,11 +28,16 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     chat.setTgChatName("Chat name");
     chatService.saveChat(chat);
 
-    partyService.createParty(1L);
+    final Party party = partyService.createParty(1L);
 
     Chat chat2 = new Chat();
     chat2.setTgChatId(2L);
     chat2.setTgChatName("Chat two");
     chatService.saveChat(chat2);
+
+    Chat chat3 = new Chat();
+    chat3.setTgChatId(3L);
+    chat3.setTgChatName("Chat three");
+    chatService.saveChat(chat3);
   }
 }
