@@ -7,6 +7,7 @@ import org.springframework.data.relational.core.mapping.NamingStrategy;
 import org.springframework.data.relational.core.mapping.event.BeforeConvertCallback;
 import org.springframework.lang.NonNull;
 import ru.rohtuasad.chipin.core.party.model.Party;
+import ru.rohtuasad.chipin.core.payment.model.Payment;
 
 @Configuration
 public class CustomJdbcConfiguration {
@@ -29,6 +30,16 @@ public class CustomJdbcConfiguration {
         party.setPartyId(UUID.randomUUID());
       }
       return party;
+    };
+  }
+
+  @Bean
+  public BeforeConvertCallback<Payment> paymentIdGenerator() {
+    return (payment) -> {
+      if (payment.getPaymentId() == null) {
+        payment.setPaymentId(UUID.randomUUID());
+      }
+      return payment;
     };
   }
 }
