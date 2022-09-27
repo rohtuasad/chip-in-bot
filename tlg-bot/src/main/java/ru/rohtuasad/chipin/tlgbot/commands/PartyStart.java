@@ -28,13 +28,12 @@ public class PartyStart extends BotCommand {
   public void execute(AbsSender absSender, User user, Chat chat, String[] strings) {
     if ("group".equals(chat.getType())) {
       try {
-        ru.rohtuasad.chipin.core.chat.model.Chat savedChat = chatService.getChat(chat.getId());
-        if (savedChat == null) {
-          savedChat = new ru.rohtuasad.chipin.core.chat.model.Chat();
-          savedChat.setTgChatId(chat.getId());
-          savedChat.setTgChatName(chat.getTitle());
-          chatService.saveChat(savedChat);
-        }
+        ru.rohtuasad.chipin.core.chat.model.Chat savedChat =
+            new ru.rohtuasad.chipin.core.chat.model.Chat();
+        savedChat.setTgChatId(chat.getId());
+        savedChat.setTgChatName(chat.getTitle());
+        chatService.saveChat(savedChat);
+
         partyService.createParty(chat.getId());
         sendMessage(absSender, chat, "Начинаем готовиться к пати");
       } catch (IllegalStateException e) {
