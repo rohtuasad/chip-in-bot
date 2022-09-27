@@ -1,4 +1,4 @@
-create table if not exists users
+create table if not exists tg_user
 (
     user_tg_id bigint
         constraint user_pk

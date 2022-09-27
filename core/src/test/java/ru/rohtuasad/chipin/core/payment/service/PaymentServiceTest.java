@@ -12,7 +12,7 @@ import org.springframework.test.context.ActiveProfiles;
 import ru.rohtuasad.chipin.core.party.model.Party;
 import ru.rohtuasad.chipin.core.party.service.PartyServiceImpl;
 import ru.rohtuasad.chipin.core.payment.model.Payment;
-import ru.rohtuasad.chipin.core.user.model.User;
+import ru.rohtuasad.chipin.core.user.model.TgUser;
 
 @SpringBootTest()
 @ActiveProfiles("test")
@@ -25,15 +25,15 @@ class PaymentServiceTest {
 
   @Test
   void addPayment() {
-    User user = new User();
-    user.setUserTgId(1L);
-    user.setUserName("@Username");
-    user.setNickName("Nickname");
+    TgUser tgUser = new TgUser();
+    tgUser.setUserTgId(1L);
+    tgUser.setUserName("@Username");
+    tgUser.setNickName("Nickname");
 
     final Party activeParty = partyService.getActiveParty(1L);
     assertNotNull(activeParty);
 
-    paymentService.addPayment(activeParty.getPartyId(), user, BigDecimal.valueOf(1000),
+    paymentService.addPayment(activeParty.getPartyId(), tgUser, BigDecimal.valueOf(1000),
         "For pizza");
 
     List<Payment> partyPayments = paymentService.getPartyPayments(activeParty.getPartyId());

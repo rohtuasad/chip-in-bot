@@ -6,7 +6,7 @@ import java.util.UUID;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
-import ru.rohtuasad.chipin.core.user.model.User;
+import ru.rohtuasad.chipin.core.user.model.TgUser;
 
 @Data
 public class Party {
@@ -19,7 +19,7 @@ public class Party {
   @MappedCollection(idColumn = "PARTY_ID")
   private Set<PartyUser> users = new HashSet<>();
 
-  public void addUser(User user) {
-    users.add(new PartyUser(user.getId()));
+  public void addUser(TgUser tgUser) {
+    users.add(new PartyUser(tgUser.getId()));
   }
 }

@@ -4,11 +4,9 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
-import org.springframework.data.relational.core.mapping.Table;
 
 @Data
-@Table("CHIP_IN\".\"USERS")
-public class User implements Persistable<Long> {
+public class TgUser implements Persistable<Long> {
   @Id
   private Long userTgId;
   private String nickName;

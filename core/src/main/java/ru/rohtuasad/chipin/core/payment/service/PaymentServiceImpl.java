@@ -7,22 +7,22 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.rohtuasad.chipin.core.payment.model.Payment;
 import ru.rohtuasad.chipin.core.payment.repository.PaymentRepository;
-import ru.rohtuasad.chipin.core.user.model.User;
-import ru.rohtuasad.chipin.core.user.service.UserService;
+import ru.rohtuasad.chipin.core.user.model.TgUser;
+import ru.rohtuasad.chipin.core.user.service.TgUserService;
 
 @Service
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
 
   private final PaymentRepository paymentRepository;
-  private final UserService userService;
+  private final TgUserService tgUserService;
 
   @Override
-  public Payment addPayment(UUID partyId, User user, BigDecimal amount, String description) {
-    userService.saveUser(user);
+  public Payment addPayment(UUID partyId, TgUser tgUser, BigDecimal amount, String description) {
+    tgUserService.saveUser(tgUser);
     Payment payment = new Payment();
     payment.setPartyId(partyId);
-    payment.setUserId(user.getUserTgId());
+    payment.setUserId(tgUser.getUserTgId());
     payment.setAmount(amount);
     payment.setDescription(description);
     return paymentRepository.save(payment);
