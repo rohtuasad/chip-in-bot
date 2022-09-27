@@ -8,6 +8,7 @@ import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import ru.rohtuasad.chipin.core.chat.service.ChatService;
 import ru.rohtuasad.chipin.core.party.service.PartyService;
 
 @Slf4j
@@ -15,16 +16,25 @@ import ru.rohtuasad.chipin.core.party.service.PartyService;
 public class PartyStart extends BotCommand {
 
   private final PartyService partyService;
+  private final ChatService chatService;
 
-  public PartyStart(PartyService partyService) {
+  public PartyStart(PartyService partyService, ChatService chatService) {
     super("party_start", "Начать подготовку к вечеринке");
     this.partyService = partyService;
+    this.chatService = chatService;
   }
 
   @Override
   public void execute(AbsSender absSender, User user, Chat chat, String[] strings) {
     if ("group".equals(chat.getType())) {
       try {
+        ru.rohtuasad.chipin.core.chat.model.Chat savedChat = chatService.getChat(chat.getId());
+        if (savedChat == null) {
+          savedChat = new ru.rohtuasad.chipin.core.chat.model.Chat();
+          savedChat.setTgChatId(chat.getId());
+          savedChat.setTgChatName(chat.getTitle());
+          chatService.saveChat(savedChat);
+        }
         partyService.createParty(chat.getId());
         sendMessage(absSender, chat, "Начинаем готовиться к пати");
       } catch (IllegalStateException e) {

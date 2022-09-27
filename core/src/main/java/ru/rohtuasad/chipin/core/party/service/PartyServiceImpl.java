@@ -35,7 +35,11 @@ public class PartyServiceImpl implements PartyService {
   @Override
   @Nullable
   public Party getActiveParty(@NonNull Long chatId) {
-    return partyRepository.findPartyByIsActiveAndChatId(true, chatId);
+    Party partyByIsActiveAndChatId = partyRepository.findPartyByIsActiveAndChatId(true, chatId);
+    if (partyByIsActiveAndChatId == null) {
+      throw new IllegalStateException("Нет активной пати");
+    }
+    return partyByIsActiveAndChatId;
   }
 
   public Party addUser(UUID partyId, User user) {
