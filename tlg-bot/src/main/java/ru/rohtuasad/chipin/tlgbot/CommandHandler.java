@@ -10,6 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 import ru.rohtuasad.chipin.core.chat.model.Chat;
 import ru.rohtuasad.chipin.core.chat.service.ChatService;
+import ru.rohtuasad.chipin.tlgbot.commands.IAmIn;
 import ru.rohtuasad.chipin.tlgbot.commands.PartyStart;
 import ru.rohtuasad.chipin.tlgbot.commands.Pay;
 
@@ -27,6 +28,7 @@ public class CommandHandler extends TelegramLongPollingCommandBot {
   private final ChatService chatService;
   private final PartyStart partyStart;
   private final Pay pay;
+  private final IAmIn iAmIn;
 
   @Override
   public String getBotUsername() {
@@ -37,6 +39,7 @@ public class CommandHandler extends TelegramLongPollingCommandBot {
   public void init() {
     register(partyStart);
     register(pay);
+    register(iAmIn);
   }
 
   @Override
