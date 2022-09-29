@@ -1,5 +1,6 @@
 package ru.rohtuasad.chipin.core.user.service;
 
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,11 @@ public class TgUserServiceImpl implements TgUserService {
     }
     log.warn("Не удалось найти пользователя с uuid = {}", id);
     return null;
+  }
+
+  @Override
+  public List<TgUser> getUsers(List<Long> ids) {
+    return tgUserRepository.findAllByUserTgIdIn(ids);
   }
 
   @Override

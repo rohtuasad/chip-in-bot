@@ -2,6 +2,7 @@ package ru.rohtuasad.chipin.core.user.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +54,25 @@ class TgUserServiceImplTest {
     final TgUser savedTgUser = tgUserService.getUser(1);
     assertEquals("@Username1", savedTgUser.getUserName());
     assertEquals("Nickname one", savedTgUser.getNickName());
+  }
+
+  @Test
+  void getAllByIds() {
+    TgUser tgUser3 = new TgUser();
+    tgUser3.setUserTgId(3L);
+    tgUser3.setUserName("@Username3");
+    tgUser3.setNickName("Nickname three");
+    tgUserService.saveUser(tgUser3);
+
+    TgUser tgUser4 = new TgUser();
+    tgUser4.setUserTgId(4L);
+    tgUser4.setUserName("@Username4");
+    tgUser4.setNickName("Nickname four");
+    tgUserService.saveUser(tgUser4);
+
+    List<TgUser> users = tgUserService.getUsers(List.of(3L, 4L));
+    assertEquals(2, users.size());
+    assertEquals("@Username3", users.get(0).getUserName());
+    assertEquals("@Username4", users.get(1).getUserName());
   }
 }
