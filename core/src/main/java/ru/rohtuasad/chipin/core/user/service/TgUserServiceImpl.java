@@ -2,10 +2,13 @@ package ru.rohtuasad.chipin.core.user.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
+import ru.rohtuasad.chipin.core.party.model.Party;
+import ru.rohtuasad.chipin.core.party.model.PartyUser;
 import ru.rohtuasad.chipin.core.user.model.TgUser;
 import ru.rohtuasad.chipin.core.user.repository.TgUserRepository;
 
@@ -28,8 +31,10 @@ public class TgUserServiceImpl implements TgUserService {
   }
 
   @Override
-  public List<TgUser> getUsers(List<Long> ids) {
-    return tgUserRepository.findAllByUserTgIdIn(ids);
+  public List<TgUser> getUsers(Party party) {
+    List<Long> userIds = party.getUsers().stream().map(PartyUser::getUserId)
+        .collect(Collectors.toList());
+    return tgUserRepository.findAllByUserTgIdIn(userIds);
   }
 
   @Override

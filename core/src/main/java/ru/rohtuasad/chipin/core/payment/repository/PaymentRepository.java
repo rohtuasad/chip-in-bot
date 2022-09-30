@@ -6,6 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import ru.rohtuasad.chipin.core.payment.model.Payment;
 
 public interface PaymentRepository extends CrudRepository<Payment, UUID> {
-
   List<Payment> findAllByPartyId(UUID partyId);
 }

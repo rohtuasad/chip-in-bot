@@ -7,13 +7,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import ru.rohtuasad.chipin.core.party.model.Party;
+import ru.rohtuasad.chipin.core.party.service.PartyService;
 import ru.rohtuasad.chipin.core.user.model.TgUser;
 
 @SpringBootTest()
+@ActiveProfiles("test")
 class TgUserServiceImplTest {
 
   @Autowired
   private TgUserService tgUserService;
+  @Autowired
+  private PartyService partyService;
 
   @BeforeEach
   void init() {
@@ -58,6 +64,8 @@ class TgUserServiceImplTest {
 
   @Test
   void getAllByIds() {
+    Party activeParty = partyService.getActiveParty(1L);
+
     TgUser tgUser3 = new TgUser();
     tgUser3.setUserTgId(3L);
     tgUser3.setUserName("@Username3");
@@ -70,7 +78,10 @@ class TgUserServiceImplTest {
     tgUser4.setNickName("Nickname four");
     tgUserService.saveUser(tgUser4);
 
-    List<TgUser> users = tgUserService.getUsers(List.of(3L, 4L));
+    activeParty.addUser(tgUser3);
+    activeParty.addUser(tgUser4);
+
+    List<TgUser> users = tgUserService.getUsers(activeParty);
     assertEquals(2, users.size());
     assertEquals("@Username3", users.get(0).getUserName());
     assertEquals("@Username4", users.get(1).getUserName());
