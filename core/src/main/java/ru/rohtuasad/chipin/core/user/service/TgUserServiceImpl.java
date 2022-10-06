@@ -31,6 +31,15 @@ public class TgUserServiceImpl implements TgUserService {
   }
 
   @Override
+  public TgUser getUser(String nickName) {
+    final Optional<TgUser> user = tgUserRepository.findByNickName(nickName);
+    if (user.isPresent()) {
+      return user.get();
+    }
+    throw new IllegalArgumentException("Не удалось найти пользователя с юнернеймом = " + nickName);
+  }
+
+  @Override
   public List<TgUser> getUsers(Party party) {
     List<Long> userIds = party.getUsers().stream().map(PartyUser::getUserId)
         .collect(Collectors.toList());

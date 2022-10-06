@@ -6,6 +6,7 @@ import ru.rohtuasad.chipin.core.user.model.TgUser;
 
 public interface TgUserService {
   TgUser getUser(long id);
+  TgUser getUser(String nickName);
   List<TgUser> getUsers(Party party);
   TgUser saveUser(TgUser tgUser);
 }
