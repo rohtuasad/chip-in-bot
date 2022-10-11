@@ -1,6 +1,8 @@
 package ru.rohtuasad.chipin.core.transfer.service;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
@@ -36,5 +38,10 @@ public class TransferServiceImpl implements TransferService {
     transfer.setReceiverId(receiver.getId());
     transfer.setAmount(amount);
     transferRepository.save(transfer);
+  }
+
+  @Override
+  public List<Transfer> getPartyTransfers(UUID partyId) {
+    return transferRepository.findAllByPartyId(partyId);
   }
 }
