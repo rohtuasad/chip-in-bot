@@ -64,7 +64,7 @@ class TgUserServiceImplTest {
 
   @Test
   void getAllByIds() {
-    Party activeParty = partyService.getActiveParty(1L);
+    Party activeParty = partyService.getActiveParty(4L);
 
     TgUser tgUser3 = new TgUser();
     tgUser3.setUserTgId(3L);
