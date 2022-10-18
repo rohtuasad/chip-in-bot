@@ -54,11 +54,11 @@ class PartyServiceImplTest {
     tgUser.setUserName("User name");
     tgUser.setNickName("User nick name");
 
-    assert activeParty != null;
+    assertNotNull(activeParty);
     assertEquals(0, activeParty.getUsers().size());
     partyService.addUser(activeParty.getPartyId(), tgUser);
     final Party activeParty1 = partyService.getActiveParty(1L);
-    assert activeParty1 != null;
+    assertNotNull(activeParty1);
     assertEquals(1, activeParty1.getUsers().size());
   }
 

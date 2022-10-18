@@ -26,9 +26,16 @@ class TgUserServiceImplTest {
 
   @Test
   @Order(1)
-  void getUser() {
-    final TgUser tgUser = tgUserService.getUser(1);
+  void getUserById() {
+    final TgUser tgUser = tgUserService.getUser(1L);
     assertEquals("@Username", tgUser.getUserName());
+  }
+
+  @Test
+  @Order(1)
+  void getUserByUsername() {
+    final TgUser tgUser = tgUserService.getUser("@Username");
+    assertEquals(1L, tgUser.getUserTgId());
   }
 
   @Test

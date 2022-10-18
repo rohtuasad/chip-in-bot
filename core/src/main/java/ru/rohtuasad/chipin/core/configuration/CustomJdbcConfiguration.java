@@ -8,6 +8,7 @@ import org.springframework.data.relational.core.mapping.event.BeforeConvertCallb
 import org.springframework.lang.NonNull;
 import ru.rohtuasad.chipin.core.party.model.Party;
 import ru.rohtuasad.chipin.core.payment.model.Payment;
+import ru.rohtuasad.chipin.core.transfer.model.Transfer;
 
 @Configuration
 public class CustomJdbcConfiguration {
@@ -40,6 +41,16 @@ public class CustomJdbcConfiguration {
         payment.setPaymentId(UUID.randomUUID());
       }
       return payment;
+    };
+  }
+
+  @Bean
+  public BeforeConvertCallback<Transfer> transferIdGenerator() {
+    return (transfer) -> {
+      if (transfer.getTransferId() == null) {
+        transfer.setTransferId(UUID.randomUUID());
+      }
+      return transfer;
     };
   }
 }

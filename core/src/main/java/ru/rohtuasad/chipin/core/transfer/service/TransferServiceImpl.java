@@ -22,9 +22,9 @@ public class TransferServiceImpl implements TransferService {
   private final TransferRepository transferRepository;
 
   @Override
-  public void send(Long chatId, Long senderId, @NonNull String receiverNickName,
+  public void send(Long chatId, Long senderId, @NonNull String receiverUserName,
       BigDecimal amount) {
-    TgUser receiver = tgUserService.getUser(receiverNickName);
+    TgUser receiver = tgUserService.getUser(receiverUserName);
     Party activeParty = partyService.getActiveParty(chatId);
     if (!partyService.isUserInParty(activeParty.getPartyId(), senderId)) {
       throw new IllegalStateException("Отправитель не в пати");

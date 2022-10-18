@@ -8,7 +8,7 @@ import ru.rohtuasad.chipin.core.transfer.model.Transfer;
 
 public interface TransferService {
 
-  void send(Long chatId, Long senderId, @NonNull String receiverNickName, BigDecimal amount);
+  void send(Long chatId, Long senderId, @NonNull String receiverUserName, BigDecimal amount);
 
   List<Transfer> getPartyTransfers(UUID partyId);
 }

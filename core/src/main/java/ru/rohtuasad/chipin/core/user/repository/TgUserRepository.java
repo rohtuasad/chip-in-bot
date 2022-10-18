@@ -7,5 +7,5 @@ import ru.rohtuasad.chipin.core.user.model.TgUser;
 
 public interface TgUserRepository extends CrudRepository<TgUser, Long> {
   List<TgUser> findAllByUserTgIdIn(List<Long> ids);
-  Optional<TgUser> findByNickName(String nickName);
+  Optional<TgUser> findByUserName(String userName);
 }

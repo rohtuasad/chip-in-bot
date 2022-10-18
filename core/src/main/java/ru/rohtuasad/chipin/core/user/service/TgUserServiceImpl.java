@@ -31,12 +31,12 @@ public class TgUserServiceImpl implements TgUserService {
   }
 
   @Override
-  public TgUser getUser(String nickName) {
-    final Optional<TgUser> user = tgUserRepository.findByNickName(nickName);
+  public TgUser getUser(String userName) {
+    final Optional<TgUser> user = tgUserRepository.findByUserName(userName);
     if (user.isPresent()) {
       return user.get();
     }
-    throw new IllegalArgumentException("Не удалось найти пользователя с юнернеймом = " + nickName);
+    throw new IllegalArgumentException("Не удалось найти пользователя с юнернеймом = " + userName);
   }
 
   @Override
