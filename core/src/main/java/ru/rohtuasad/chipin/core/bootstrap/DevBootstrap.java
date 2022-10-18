@@ -11,6 +11,8 @@ import ru.rohtuasad.chipin.core.chat.model.Chat;
 import ru.rohtuasad.chipin.core.chat.service.ChatService;
 import ru.rohtuasad.chipin.core.party.model.Party;
 import ru.rohtuasad.chipin.core.party.service.PartyService;
+import ru.rohtuasad.chipin.core.user.model.TgUser;
+import ru.rohtuasad.chipin.core.user.service.TgUserService;
 
 @Component
 @Profile({"dev", "test"})
@@ -19,6 +21,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
   private final ChatService chatService;
   private final PartyService partyService;
+  private final TgUserService tgUserService;
 
   @SneakyThrows
   @Override
@@ -46,5 +49,11 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     chatService.saveChat(chat4);
 
     partyService.createParty(4L);
+
+    TgUser tgUser = new TgUser();
+    tgUser.setUserTgId(1L);
+    tgUser.setUserName("@Username");
+    tgUser.setNickName("Nickname");
+    tgUserService.saveUser(tgUser);
   }
 }

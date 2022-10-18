@@ -1,10 +1,12 @@
 package ru.rohtuasad.chipin.core.user.service;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -14,6 +16,7 @@ import ru.rohtuasad.chipin.core.user.model.TgUser;
 
 @SpringBootTest()
 @ActiveProfiles("test")
+@TestMethodOrder(OrderAnnotation.class)
 class TgUserServiceImplTest {
 
   @Autowired
@@ -21,16 +24,8 @@ class TgUserServiceImplTest {
   @Autowired
   private PartyService partyService;
 
-  @BeforeEach
-  void init() {
-    TgUser tgUser = new TgUser();
-    tgUser.setUserTgId(1L);
-    tgUser.setUserName("@Username");
-    tgUser.setNickName("Nickname");
-    tgUserService.saveUser(tgUser);
-  }
-
   @Test
+  @Order(1)
   void getUser() {
     final TgUser tgUser = tgUserService.getUser(1);
     assertEquals("@Username", tgUser.getUserName());
