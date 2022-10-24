@@ -63,6 +63,9 @@ public class PartyInfoServiceImpl implements PartyInfoService {
     BigDecimal middleValue = total.divide(
         BigDecimal.valueOf(partyInfo.getPartyUserInfoMap().size()), MathContext.DECIMAL32);
 
+    partyInfo.setTotal(total);
+    partyInfo.setMiddleValue(middleValue);
+
     partyInfo.getPartyUserInfoMap().values().forEach(user ->
         user.setTotal(user.getTotal().subtract(middleValue))
     );

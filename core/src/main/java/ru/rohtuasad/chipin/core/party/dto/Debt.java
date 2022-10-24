@@ -7,5 +7,5 @@ import ru.rohtuasad.chipin.core.user.model.TgUser;
 @Data
 public class Debt {
   private TgUser creditor;
-  private BigDecimal amount;
+  private BigDecimal amount = BigDecimal.ZERO;
 }

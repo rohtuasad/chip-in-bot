@@ -11,7 +11,7 @@ import ru.rohtuasad.chipin.core.user.model.TgUser;
 @Data
 public class PartyUserInfo {
   private final TgUser user;
-  private BigDecimal total;
+  private BigDecimal total = BigDecimal.ZERO;
   private Set<Payment> paymentSet = new HashSet<>();
   private Set<Transfer> transferSet = new HashSet<>();
   private Set<Debt> debt = new HashSet<>();
