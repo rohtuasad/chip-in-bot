@@ -57,10 +57,10 @@ class PartyInfoServiceImplTest {
     paymentService.addPayment(party.getPartyId(), tgUser1, BigDecimal.valueOf(620), "За баньку");
     paymentService.addPayment(party.getPartyId(), tgUser3, BigDecimal.valueOf(380), "За пиццку");
 
-    transferService.send(chat.getTgChatId(), 2L, "@Username1", BigDecimal.valueOf(50));
-    transferService.send(chat.getTgChatId(), 3L, "@Username1", BigDecimal.valueOf(50));
-    transferService.send(chat.getTgChatId(), 4L, "@Username1", BigDecimal.valueOf(50));
-    transferService.send(chat.getTgChatId(), 5L, "@Username1", BigDecimal.valueOf(50));
+    transferService.send(chat.getTgChatId(), tgUser2, "@Username1", BigDecimal.valueOf(50));
+    transferService.send(chat.getTgChatId(), tgUser3, "@Username1", BigDecimal.valueOf(50));
+    transferService.send(chat.getTgChatId(), tgUser4, "@Username1", BigDecimal.valueOf(50));
+    transferService.send(chat.getTgChatId(), tgUser5, "@Username1", BigDecimal.valueOf(50));
 
     PartyInfo partyInfo = partyInfoService.getPartyInfo(5L);
     assertEquals(5, partyInfo.getPartyUserInfoMap().size());

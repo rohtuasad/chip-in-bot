@@ -51,7 +51,7 @@ class TransferServiceImplTest {
 
     partyService.addUser(activeParty.getPartyId(), tgUser3);
     partyService.addUser(activeParty.getPartyId(), tgUser4);
-    transferService.send(4L, 3L, "@Username4", BigDecimal.valueOf(1000.10));
+    transferService.send(4L, tgUser3, "@Username4", BigDecimal.valueOf(1000.10));
 
     assertEquals(0, partyTransfers.size());
     partyTransfers = transferService.getPartyTransfers(activeParty.getPartyId());

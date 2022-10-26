@@ -60,6 +60,11 @@ class PartyServiceImplTest {
     final Party activeParty1 = partyService.getActiveParty(1L);
     assertNotNull(activeParty1);
     assertEquals(1, activeParty1.getUsers().size());
+
+    partyService.addUser(activeParty.getPartyId(), tgUser);
+    final Party activeParty2 = partyService.getActiveParty(1L);
+    assertNotNull(activeParty2);
+    assertEquals(1, activeParty2.getUsers().size());
   }
 
   @Test

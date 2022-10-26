@@ -21,20 +21,21 @@ public class TransferServiceImpl implements TransferService {
   private final PartyService partyService;
   private final TransferRepository transferRepository;
 
+
   @Override
-  public void send(Long chatId, Long senderId, @NonNull String receiverUserName,
+  public void send(Long chatId, TgUser sender, @NonNull String receiverUserName,
       BigDecimal amount) {
-    TgUser receiver = tgUserService.getUser(receiverUserName);
+    tgUserService.saveUser(sender);
     Party activeParty = partyService.getActiveParty(chatId);
-    if (!partyService.isUserInParty(activeParty.getPartyId(), senderId)) {
-      throw new IllegalStateException("Отправитель не в пати");
-    }
+    partyService.addUser(activeParty.getPartyId(), sender);
+
+    TgUser receiver = tgUserService.getUser(receiverUserName);
     if (!partyService.isUserInParty(activeParty.getPartyId(), receiver.getUserTgId())) {
       throw new IllegalStateException("Получатель не в пати");
     }
     Transfer transfer = new Transfer();
     transfer.setPartyId(activeParty.getPartyId());
-    transfer.setSenderId(senderId);
+    transfer.setSenderId(sender.getId());
     transfer.setReceiverId(receiver.getId());
     transfer.setAmount(amount);
     transferRepository.save(transfer);
